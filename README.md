@@ -18,7 +18,7 @@ require 'capistrano/rack'
 
 And then execute:
 
-	$ bundle
+	$ bundle && bundle exec rake
 
 Make sure to have a `~/.rack/config` in your `$HOME` directory with these properties:
 
