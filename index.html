@@ -20,9 +20,58 @@
 
     <section class="main-content">
       <h1>
-<a id="capistrano-rack" class="anchor" href="#capistrano-rack" aria-hidden="true"><span class="octicon octicon-link"></span></a>capistrano-rack</h1>
+<a id="capistrano-rack-" class="anchor" href="#capistrano-rack-" aria-hidden="true"><span class="octicon octicon-link"></span></a>capistrano-rack <a href="https://travis-ci.org/amrfaissal/capistrano-rack"><img src="https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master" alt="Build Status"></a>
+</h1>
 
 <p>Capistrano recipe to be served with Rackspace</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your <code>Gemfile</code>:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>capistrano-rack<span class="pl-pds">'</span></span></pre></div>
+
+<p>and in your <code>Capfile</code>:</p>
+
+<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>capistrano/rack<span class="pl-pds">'</span></span></pre></div>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle &amp;&amp; bundle exec rake
+</code></pre>
+
+<p>Make sure to have a <code>~/.rack/config</code> in your <code>$HOME</code> directory with these properties:</p>
+
+<pre lang="text"><code>region   = rackspace_region (e.g LON)
+username = your_username
+api-key  = your_api_key
+</code></pre>
+
+<p>If you are already a <a href="https://developer.rackspace.com/docs/rack-cli/"><strong>Rackspace CLI</strong></a> user, you can skip the step above.</p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>You can use <code>capistrano-rack</code> recipe in your deployment script like this:</p>
+
+<div class="highlight highlight-source-ruby"><pre>rackspace_servers(<span class="pl-c1">:roles</span>, <span class="pl-s"><span class="pl-pds">'</span>^regex<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>where <code>regex</code> is a regular expression to filter throught the names of your servers.</p>
+
+<p>If you want to use a different configuration file for Rackspace, <code>rackspace_servers()</code> have an additional parameter:</p>
+
+<div class="highlight highlight-source-ruby"><pre>rackspace_servers(<span class="pl-c1">:roles</span>, <span class="pl-s"><span class="pl-pds">'</span>^regex<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>/path/to/my/config/file<span class="pl-pds">'</span></span>)</pre></div>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the <a href="contributor-covenant.org">Contributor Covenant</a> code of conduct.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>The gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/amrfaissal/capistrano-rack">capistrano-rack</a> is maintained by <a href="https://github.com/amrfaissal">amrfaissal</a>.</span>
