@@ -30,7 +30,13 @@ describe Capistrano::Rack do
   subject { mock_rackspace.new }
 
   describe '#rackspace_servers' do
-    let(:output) { subject.rackspace_servers(:web, '^myserver-') }
+    let(:output) {
+      begin
+        subject.rackspace_servers( :web, '^myserver-', (Dir.getwd + "/spec/config") )
+      rescue
+        []
+      end
+    }
 
     it 'should return an empty list of Rackspace servers' do
       expect(output).to eq []

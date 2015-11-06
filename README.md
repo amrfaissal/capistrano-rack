@@ -1,4 +1,4 @@
-# capistrano-rack
+# capistrano-rack [![Build Status](https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master)](https://travis-ci.org/amrfaissal/capistrano-rack)
 
 Capistrano recipe to be served with Rackspace
 
@@ -39,6 +39,12 @@ rackspace_servers(:roles, '^regex')
 ```
 
 where `regex` is a regular expression to filter throught the names of your servers.
+
+If you want to use a different configuration file for Rackspace, `rackspace_servers()` have an additional parameter:
+
+```ruby
+rackspace_servers(:roles, '^regex', '/path/to/my/config/file')
+```
 
 ## Contributing
 

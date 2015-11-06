@@ -29,8 +29,6 @@ end
 
 module Capistrano
   module Rack
-    @@props_reader = PropertiesReader.new("#{ENV['HOME']}/.rack/config")
-
     #
     # Retrieves a list of Rackspace instances containing a tag list
     # which matches a supplied hash. Matching instances are applied
@@ -38,13 +36,14 @@ module Capistrano
     #
     # Usage: servers {'app' => 'zumba', 'stack' => 'web'}
     #
-    def rackspace_servers(role=nil, regex_string='')
+    def rackspace_servers(role=nil, regex_string='', config_file=nil)
+      props_reader = PropertiesReader.new(config_file || "#{ENV['HOME']}/.rack/config")
       rackspace = Fog::Compute.new(
         {
           :provider => 'Rackspace',
-          :rackspace_api_key => @@props_reader.get("api-key"),
-          :rackspace_username => @@props_reader.get("username"),
-          :rackspace_region => @@props_reader.get("region"),
+          :rackspace_api_key => props_reader.get("api-key"),
+          :rackspace_username => props_reader.get("username"),
+          :rackspace_region => props_reader.get("region"),
           :version => :v2,
           :connection_options => {}
         })
