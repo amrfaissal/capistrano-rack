@@ -3,9 +3,6 @@ require 'fog'
 require 'capistrano'
 require 'capistrano/rack/version'
 
-#
-# Properties Reader
-#
 class PropertiesReader
   def initialize(file)
     @file = file
@@ -27,35 +24,56 @@ class PropertiesReader
   
 end
 
+class RackspaceOptions
+  def self.get(config_file=nil)
+    props_reader = PropertiesReader.new(config_file || "#{ENV['HOME']}/.rack/config")
+    return {
+      :rackspace_api_key => props_reader.get("api-key"),
+      :rackspace_username => props_reader.get("username"),
+      :rackspace_region => props_reader.get("region")
+    }
+  end
+end
+
 module Capistrano
   module Rack
-    #
-    # Retrieves a list of Rackspace instances containing a tag list
-    # which matches a supplied hash. Matching instances are applied
-    # to the Cap server list.
-    #
-    # Usage: servers {'app' => 'zumba', 'stack' => 'web'}
-    #
-    def rackspace_servers(role=nil, regex_string='', config_file=nil)
-      props_reader = PropertiesReader.new(config_file || "#{ENV['HOME']}/.rack/config")
-      rackspace = Fog::Compute.new(
-        {
-          :provider => 'Rackspace',
-          :rackspace_api_key => props_reader.get("api-key"),
-          :rackspace_username => props_reader.get("username"),
-          :rackspace_region => props_reader.get("region"),
-          :version => :v2,
-          :connection_options => {}
-        })
-      response = rackspace.list_servers
-      response.body['servers'].select do |rackspace_server|
-        if !rackspace_server["name"].match(/#{regex_string}/).nil?
-          # Iterate over the list of private IP addresses
-          rackspace_server['addresses']['private'].select do |private_addr|
-            server (private_addr['addr']), %w{role || :app}
-          end
-        end
+    def rackspace_servers(roles=[], regex_str='', addr_type=:private, config_file=nil, connection_options={})
+      @compute_service = Fog::Compute.new(RackspaceOptions.get(config_file)
+                                          .merge({
+                                                   :provider => 'Rackspace',
+                                                   :version => :v2,
+                                                   :connection_options => connection_options
+                                                 }))
+      # List all servers and filter them based on the passed 'regex_str' parameter
+      @compute_service.list_servers.body['servers']
+        .select { |server| !server['name'].match(/#{regex_str}/).nil? }
+        .flat_map { |s| s["addresses"][addr_type.to_s] }
+        .select { |iface| iface['version'] == 4 }
+        .map { |iface| iface['addr'] }
+        .each { |server_addr| server (server_addr), roles || %w{:app} }
+    end
+
+    def rackspace_autoscale(roles=[], group_name='', addr_type=:private, config_file=nil, connection_options={})
+      rackspace_options = RackspaceOptions.get(config_file)
+      
+      if !connection_options.empty? then
+        rackspace_options.merge!({:connection_options => connection_options})
       end
+      
+      @compute_service = Fog::Compute.new(rackspace_options.merge({
+                                                                   :provider => 'Rackspace',
+                                                                   :version => :v2
+                                                                 }))
+      @autoscale_service = Fog::Rackspace::AutoScale.new(rackspace_options)
+
+      # Get the servers Ids inside the specified group name
+      @autoscale_service.groups.find { |g| g.group_config.name == group_name }.state['active']
+        .map { |server| server['id'] }
+        .map { |id| @compute_service.servers.get id }
+        .flat_map { |h| h.addresses[addr_type.to_s] }
+        .select { |iface| iface['version'] == 4 }
+        .map { |iface| iface['addr'] }
+        .each { |server_addr| server (server_addr), roles || %w{:app} }
     end
     
   end

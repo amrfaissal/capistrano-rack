@@ -18,7 +18,7 @@ require 'capistrano/rack'
 
 And then execute:
 
-	$ bundle && bundle exec rake
+    $ bundle && bundle exec rake
 
 Make sure to have a `~/.rack/config` in your `$HOME` directory with these properties:
 
@@ -32,25 +32,75 @@ If you are already a [**Rackspace CLI**](https://developer.rackspace.com/docs/ra
 
 ## Usage
 
-You can use `capistrano-rack` recipe in your deployment script like this:
+`capistrano-rack` recipe supports two Rackspace Cloud services:
+
+### Next Generation Cloud Servers&trade;
+
+To deploy to your Next Gen Cloud servers:
 
 ```ruby
-rackspace_servers(:roles, '^regex')
+rackspace_servers(roles=[], regex_str='^myservers-', addr_type=:private, config_file=nil, connection_options={})
 ```
 
-where `regex` is a regular expression to filter throught the names of your servers.
+Where:
+* `roles`: your [Capistrano Roles](http://capistranorb.com/).
+* `regex_str`: a regular expression to filter throught your Next Gen Cloud servers.
+* `addr_type`: type of IP addresses (`:public` or `:private`).
+* `config_file`: Rackspace configuration file.
+* `connection_options`: Optional connection parameters.
 
-If you want to use a different configuration file for Rackspace, `rackspace_servers()` have an additional parameter:
+### Auto Scale
+
+To deploy to your Scaling Group:
 
 ```ruby
-rackspace_servers(:roles, '^regex', '/path/to/my/config/file')
+rackspace_autoscale(roles=[], group_name='', addr_type=:private, config_file=nil, connection_options={})
 ```
+
+Where:
+* `roles`: your [Capistrano Roles](http://capistranorb.com/).
+* `group_name`: Name of your Scaling Group.
+* `addr_type`: type of IP addresses (`:public` or `:private`).
+* `config_file`: Rackspace configuration file.
+* `connection_options`: Optional connection parameters.
+
+### Optional Connection Parameters
+
+<table>
+    <tr><th>Key</th><th>Description</th></tr>
+    <tr>
+        <td>:connect_timeout</td>
+        <td>Connection timeout (default: 60 seconds)</td>
+    </tr>
+    <tr>
+        <td>:read_timeout</td>      
+        <td>Read timeout for connection (default: 60 seconds)</td>  </tr>
+    <tr>
+        <td>:write_timeout</td>
+        <td>Write timeout for connection (default: 60 seconds)</td>
+    </tr>
+    <tr>
+        <td>:proxy</td>
+        <td>Proxy for HTTP and HTTPS connections</td>
+    </tr>
+    <tr>
+        <td>:ssl_ca_path</td>
+        <td>Path to SSL certificate authorities</td>
+    </tr>
+    <tr>
+        <td>:ssl_ca_file</td>
+        <td>SSL certificate authority file</td>
+    </tr>
+    <tr>
+        <td>:ssl_verify_peer</td>
+        <td>SSL verify peer (default: true)</td>
+    </tr>   
+</table>
 
 ## Contributing
 
 Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
-
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+This gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

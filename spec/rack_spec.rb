@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe PropertiesReader do
-  subject { PropertiesReader.new(Dir.getwd + "/spec/config") }
+  subject { PropertiesReader.new(Dir.getwd + '/spec/config') }
 
   describe '#to_s' do
     let(:output) { subject.to_s }
@@ -32,13 +32,27 @@ describe Capistrano::Rack do
   describe '#rackspace_servers' do
     let(:output) {
       begin
-        subject.rackspace_servers( :web, '^myserver-', (Dir.getwd + "/spec/config") )
+        subject.rackspace_servers( :web, '^myserver-', (Dir.getwd + '/spec/config') )
       rescue
         []
       end
     }
 
     it 'should return an empty list of Rackspace servers' do
+      expect(output).to eq []
+    end
+  end
+
+  describe '#autoscale_servers' do
+    let(:output) {
+      begin
+        subject.rackspace_autoscale(:web, 'mygroup', (Dir.getwd + '/spec/config') )
+      rescue
+        []
+      end
+    }
+
+    it 'should return an empty list of Rackspace Autoscale servers in \'mygroup\'' do
       expect(output).to eq []
     end
   end
