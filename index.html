@@ -53,15 +53,88 @@ api-key  = your_api_key
 <h2>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>You can use <code>capistrano-rack</code> recipe in your deployment script like this:</p>
+<p><code>capistrano-rack</code> recipe supports two Rackspace Cloud services:</p>
 
-<div class="highlight highlight-source-ruby"><pre>rackspace_servers(<span class="pl-c1">:roles</span>, <span class="pl-s"><span class="pl-pds">'</span>^regex<span class="pl-pds">'</span></span>)</pre></div>
+<h3>
+<a id="next-generation-cloud-servers" class="anchor" href="#next-generation-cloud-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Next Generation Cloud Servers™</h3>
 
-<p>where <code>regex</code> is a regular expression to filter throught the names of your servers.</p>
+<p>To deploy to your Next Gen Cloud servers:</p>
 
-<p>If you want to use a different configuration file for Rackspace, <code>rackspace_servers()</code> have an additional parameter:</p>
+<div class="highlight highlight-source-ruby"><pre>rackspace_servers(roles<span class="pl-k">=</span>[], regex_str<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>^myservers-<span class="pl-pds">'</span></span>, addr_type<span class="pl-k">=</span><span class="pl-c1">:private</span>, config_file<span class="pl-k">=</span><span class="pl-c1">nil</span>, connection_options<span class="pl-k">=</span>{})</pre></div>
 
-<div class="highlight highlight-source-ruby"><pre>rackspace_servers(<span class="pl-c1">:roles</span>, <span class="pl-s"><span class="pl-pds">'</span>^regex<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>/path/to/my/config/file<span class="pl-pds">'</span></span>)</pre></div>
+<p>Where:</p>
+
+<ul>
+<li>
+<code>roles</code>: your <a href="http://capistranorb.com/">Capistrano Roles</a>.</li>
+<li>
+<code>regex_str</code>: a regular expression to filter throught your Next Gen Cloud servers.</li>
+<li>
+<code>addr_type</code>: type of IP addresses (<code>:public</code> or <code>:private</code>).</li>
+<li>
+<code>config_file</code>: Rackspace configuration file.</li>
+<li>
+<code>connection_options</code>: Optional connection parameters.</li>
+</ul>
+
+<h3>
+<a id="auto-scale" class="anchor" href="#auto-scale" aria-hidden="true"><span class="octicon octicon-link"></span></a>Auto Scale</h3>
+
+<p>To deploy to your Scaling Group:</p>
+
+<div class="highlight highlight-source-ruby"><pre>rackspace_autoscale(roles<span class="pl-k">=</span>[], group_name<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, addr_type<span class="pl-k">=</span><span class="pl-c1">:private</span>, config_file<span class="pl-k">=</span><span class="pl-c1">nil</span>, connection_options<span class="pl-k">=</span>{})</pre></div>
+
+<p>Where:</p>
+
+<ul>
+<li>
+<code>roles</code>: your <a href="http://capistranorb.com/">Capistrano Roles</a>.</li>
+<li>
+<code>group_name</code>: Name of your Scaling Group.</li>
+<li>
+<code>addr_type</code>: type of IP addresses (<code>:public</code> or <code>:private</code>).</li>
+<li>
+<code>config_file</code>: Rackspace configuration file.</li>
+<li>
+<code>connection_options</code>: Optional connection parameters.</li>
+</ul>
+
+<h3>
+<a id="optional-connection-parameters" class="anchor" href="#optional-connection-parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional Connection Parameters</h3>
+
+<table>
+    <tr>
+<th>Key</th>
+<th>Description</th>
+</tr>
+    <tr>
+        <td>:connect_timeout</td>
+        <td>Connection timeout (default: 60 seconds)</td>
+    </tr>
+    <tr>
+        <td>:read_timeout</td>      
+        <td>Read timeout for connection (default: 60 seconds)</td>  </tr>
+    <tr>
+        <td>:write_timeout</td>
+        <td>Write timeout for connection (default: 60 seconds)</td>
+    </tr>
+    <tr>
+        <td>:proxy</td>
+        <td>Proxy for HTTP and HTTPS connections</td>
+    </tr>
+    <tr>
+        <td>:ssl_ca_path</td>
+        <td>Path to SSL certificate authorities</td>
+    </tr>
+    <tr>
+        <td>:ssl_ca_file</td>
+        <td>SSL certificate authority file</td>
+    </tr>
+    <tr>
+        <td>:ssl_verify_peer</td>
+        <td>SSL verify peer (default: true)</td>
+    </tr>   
+</table>
 
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
@@ -71,7 +144,7 @@ api-key  = your_api_key
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
-<p>The gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+<p>This gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/amrfaissal/capistrano-rack">capistrano-rack</a> is maintained by <a href="https://github.com/amrfaissal">amrfaissal</a>.</span>
