@@ -37,7 +37,7 @@ end
 
 module Capistrano
   module Rack
-    def rackspace_servers(roles=[], regex_str='', addr_type=:private, config_file=nil, connection_options={})
+    def rackspace_servers(roles=nil, regex_str='', addr_type=:private, config_file=nil, connection_options={})
       @compute_service = Fog::Compute.new(RackspaceOptions.get(config_file)
                                           .merge({
                                                    :provider => 'Rackspace',
@@ -50,10 +50,11 @@ module Capistrano
         .flat_map { |s| s["addresses"][addr_type.to_s] }
         .select { |iface| iface['version'] == 4 }
         .map { |iface| iface['addr'] }
-        .each { |server_addr| server (server_addr), roles || %w{:app} }
+        .each { |server_addr| server server_addr,
+                                     { :roles => (roles || %w{app}) } }
     end
 
-    def rackspace_autoscale(roles=[], group_name='', addr_type=:private, config_file=nil, connection_options={})
+    def rackspace_autoscale(roles=nil, group_name='', addr_type=:private, config_file=nil, connection_options={})
       rackspace_options = RackspaceOptions.get(config_file)
       
       if !connection_options.empty? then
@@ -73,7 +74,8 @@ module Capistrano
         .flat_map { |h| h.addresses[addr_type.to_s] }
         .select { |iface| iface['version'] == 4 }
         .map { |iface| iface['addr'] }
-        .each { |server_addr| server (server_addr), roles || %w{:app} }
+        .each { |server_addr| server server_addr,
+                                     { :roles => (roles || %w{app}) } }
     end
     
   end

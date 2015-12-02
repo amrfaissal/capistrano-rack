@@ -7,7 +7,6 @@ require 'capistrano/rack/version'
 Gem::Specification.new do |spec|
   spec.name          = "capistrano-rack"
   spec.version       = Capistrano::Rack::VERSION
-  spec.version       = "#{spec.version}-alpha-#{ENV['TRAVIS_BUILD_NUMBER']}" if ENV['TRAVIS']
   spec.authors       = ["Faissal Elamraoui"]
   spec.email         = ["amr.faissal@gmail.com"]
 

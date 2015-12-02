@@ -32,7 +32,7 @@ describe Capistrano::Rack do
   describe '#rackspace_servers' do
     let(:output) {
       begin
-        subject.rackspace_servers( :web, '^myserver-', (Dir.getwd + '/spec/config') )
+        subject.rackspace_servers( %w{web}, '^myserver-', (Dir.getwd + '/spec/config') )
       rescue
         []
       end
@@ -46,7 +46,7 @@ describe Capistrano::Rack do
   describe '#autoscale_servers' do
     let(:output) {
       begin
-        subject.rackspace_autoscale(:web, 'mygroup', (Dir.getwd + '/spec/config') )
+        subject.rackspace_autoscale( %w{web}, 'mygroup', (Dir.getwd + '/spec/config') )
       rescue
         []
       end
