@@ -39,10 +39,11 @@ If you are already a [**Rackspace CLI**](https://developer.rackspace.com/docs/ra
 To deploy to your Next Gen Cloud servers:
 
 ```ruby
-rackspace_servers(roles=[], regex_str='^myservers-', addr_type=:private, config_file=nil, connection_options={})
+rackspace_servers %w{app web}, '^myservers-'
 ```
 
-Where:
+`rackspace_servers()` function supports the following ordered parameters:
+
 * `roles`: your [Capistrano Roles](http://capistranorb.com/).
 * `regex_str`: a regular expression to filter throught your Next Gen Cloud servers.
 * `addr_type`: type of IP addresses (`:public` or `:private`).
@@ -54,10 +55,11 @@ Where:
 To deploy to your Scaling Group:
 
 ```ruby
-rackspace_autoscale(roles=[], group_name='', addr_type=:private, config_file=nil, connection_options={})
+rackspace_autoscale %w{app web}, 'mygroup'
 ```
 
-Where:
+`rackspace_autoscale()` function supports the following ordered parameters:
+
 * `roles`: your [Capistrano Roles](http://capistranorb.com/).
 * `group_name`: Name of your Scaling Group.
 * `addr_type`: type of IP addresses (`:public` or `:private`).
@@ -99,7 +101,7 @@ Where:
 
 ## Contributing
 
-Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
 
 ## License
 
