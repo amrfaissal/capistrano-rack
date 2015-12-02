@@ -1,25 +1,34 @@
 <!DOCTYPE html>
-<html lang="en-us">
+<html>
   <head>
-    <meta charset="UTF-8">
-    <title>capistrano-rack by amrfaissal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
-  <body>
-    <section class="page-header">
-      <h1 class="project-name">capistrano-rack</h1>
-      <h2 class="project-tagline">Capistrano recipe to be served with Rackspace</h2>
-      <a href="https://github.com/amrfaissal/capistrano-rack" class="btn">View on GitHub</a>
-      <a href="https://github.com/amrfaissal/capistrano-rack/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/amrfaissal/capistrano-rack/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <section class="main-content">
-      <h1>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>capistrano-rack by amrfaissal</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>capistrano-rack</h1>
+        <h2>Capistrano recipe to be served with Rackspace</h2>
+        <a href="https://github.com/amrfaissal/capistrano-rack" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a id="capistrano-rack--" class="anchor" href="#capistrano-rack--" aria-hidden="true"><span class="octicon octicon-link"></span></a>capistrano-rack <a href="https://travis-ci.org/amrfaissal/capistrano-rack"><img src="https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master" alt="Build Status"></a> <a href="https://badge.fury.io/rb/capistrano-rack"><img src="https://badge.fury.io/rb/capistrano-rack.svg" alt="Gem Version"></a>
 </h1>
 
@@ -60,9 +69,9 @@ api-key  = your_api_key
 
 <p>To deploy to your Next Gen Cloud servers:</p>
 
-<div class="highlight highlight-source-ruby"><pre>rackspace_servers(roles<span class="pl-k">=</span>[], regex_str<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>^myservers-<span class="pl-pds">'</span></span>, addr_type<span class="pl-k">=</span><span class="pl-c1">:private</span>, config_file<span class="pl-k">=</span><span class="pl-c1">nil</span>, connection_options<span class="pl-k">=</span>{})</pre></div>
+<div class="highlight highlight-source-ruby"><pre>rackspace_servers <span class="pl-s"><span class="pl-pds">%w{</span>app web<span class="pl-pds">}</span></span>, <span class="pl-s"><span class="pl-pds">'</span>^myservers-<span class="pl-pds">'</span></span></pre></div>
 
-<p>Where:</p>
+<p><code>rackspace_servers()</code> function supports the following ordered parameters:</p>
 
 <ul>
 <li>
@@ -82,9 +91,9 @@ api-key  = your_api_key
 
 <p>To deploy to your Scaling Group:</p>
 
-<div class="highlight highlight-source-ruby"><pre>rackspace_autoscale(roles<span class="pl-k">=</span>[], group_name<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, addr_type<span class="pl-k">=</span><span class="pl-c1">:private</span>, config_file<span class="pl-k">=</span><span class="pl-c1">nil</span>, connection_options<span class="pl-k">=</span>{})</pre></div>
+<div class="highlight highlight-source-ruby"><pre>rackspace_autoscale <span class="pl-s"><span class="pl-pds">%w{</span>app web<span class="pl-pds">}</span></span>, <span class="pl-s"><span class="pl-pds">'</span>mygroup<span class="pl-pds">'</span></span></pre></div>
 
-<p>Where:</p>
+<p><code>rackspace_autoscale()</code> function supports the following ordered parameters:</p>
 
 <ul>
 <li>
@@ -139,20 +148,30 @@ api-key  = your_api_key
 <h2>
 <a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
 
-<p>Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the <a href="contributor-covenant.org">Contributor Covenant</a> code of conduct.</p>
+<p>Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the <a href="http://contributor-covenant.org/">Contributor Covenant</a> code of conduct.</p>
 
 <h2>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
 
 <p>This gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
+        </section>
 
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/amrfaissal/capistrano-rack">capistrano-rack</a> is maintained by <a href="https://github.com/amrfaissal">amrfaissal</a>.</span>
+        <aside id="sidebar">
+          <a href="https://github.com/amrfaissal/capistrano-rack/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/amrfaissal/capistrano-rack/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
 
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
+          <p class="repo-owner"><a href="https://github.com/amrfaissal/capistrano-rack"></a> is maintained by <a href="https://github.com/amrfaissal">amrfaissal</a>.</p>
 
-    </section>
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
 
   
   </body>
