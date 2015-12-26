@@ -1,4 +1,4 @@
-# capistrano-rack [![Build Status](https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master)](https://travis-ci.org/amrfaissal/capistrano-rack) [![Dependency Status](https://gemnasium.com/amrfaissal/capistrano-rack.svg)](https://gemnasium.com/amrfaissal/capistrano-rack) [![Gem Version](https://badge.fury.io/rb/capistrano-rack.svg)](https://badge.fury.io/rb/capistrano-rack)
+# capistrano-rack [![Build Status](https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master)](https://travis-ci.org/amrfaissal/capistrano-rack) [![Dependency Status](https://gemnasium.com/amrfaissal/capistrano-rack.svg)](https://gemnasium.com/amrfaissal/capistrano-rack) [![Gem Version](https://badge.fury.io/rb/capistrano-rack.svg)](https://badge.fury.io/rb/capistrano-rack) [![ghit.me](https://ghit.me/badge.svg?repo=amrfaissal/capistrano-rack)](https://ghit.me/repo/amrfaissal/capistrano-rack)
 
 Capistrano recipe to be served with Rackspace
 
