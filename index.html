@@ -29,87 +29,89 @@
       </header>
       <section>
         <h1>
-<a id="capistrano-rack----" class="anchor" href="#capistrano-rack----" aria-hidden="true"><span class="octicon octicon-link"></span></a>capistrano-rack <a href="https://travis-ci.org/amrfaissal/capistrano-rack"><img src="https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master" alt="Build Status"></a> <a href="https://gemnasium.com/amrfaissal/capistrano-rack"><img src="https://gemnasium.com/amrfaissal/capistrano-rack.svg" alt="Dependency Status"></a> <a href="https://badge.fury.io/rb/capistrano-rack"><img src="https://badge.fury.io/rb/capistrano-rack.svg" alt="Gem Version"></a> <a href="https://ghit.me/repo/amrfaissal/capistrano-rack"><img src="https://ghit.me/badge.svg?repo=amrfaissal/capistrano-rack" alt="ghit.me"></a>
+<a id="capistrano-rack----" class="anchor" href="#capistrano-rack----" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>capistrano-rack <a href="https://travis-ci.org/amrfaissal/capistrano-rack"><img src="https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master" alt="Build Status"></a> <a href="https://gemnasium.com/amrfaissal/capistrano-rack"><img src="https://gemnasium.com/amrfaissal/capistrano-rack.svg" alt="Dependency Status"></a> <a href="https://badge.fury.io/rb/capistrano-rack"><img src="https://badge.fury.io/rb/capistrano-rack.svg" alt="Gem Version"></a> <a href="https://ghit.me/repo/amrfaissal/capistrano-rack"><img src="https://ghit.me/badge.svg?repo=amrfaissal/capistrano-rack" alt="ghit.me"></a>
 </h1>
 
 <p>Capistrano recipe to be served with Rackspace</p>
 
 <h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Add this line to your <code>Gemfile</code>:</p>
 
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>capistrano-rack<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre>    <span class="pl-k">gem</span> <span class="pl-s"><span class="pl-pds">'</span>capistrano-rack<span class="pl-pds">'</span></span></pre></div>
 
 <p>and in your <code>Capfile</code>:</p>
 
-<div class="highlight highlight-source-ruby"><pre><span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>capistrano/rack<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre>    <span class="pl-k">require</span> <span class="pl-s"><span class="pl-pds">'</span>capistrano/rack<span class="pl-pds">'</span></span></pre></div>
 
 <p>And then execute:</p>
 
-<pre><code>$ bundle &amp;&amp; bundle exec rake
-</code></pre>
+<div class="highlight highlight-source-shell"><pre>    $ bundle <span class="pl-k">&amp;&amp;</span> bundle <span class="pl-c1">exec</span> rake</pre></div>
 
 <p>Make sure to have a <code>~/.rack/config</code> in your <code>$HOME</code> directory with these properties:</p>
 
-<pre lang="text"><code>region   = rackspace_region (e.g LON)
-username = your_username
-api-key  = your_api_key
+<pre lang="text"><code>    region   = rackspace_region (e.g LON)
+    username = your_username
+    api-key  = your_api_key
 </code></pre>
 
 <p>If you are already a <a href="https://developer.rackspace.com/docs/rack-cli/"><strong>Rackspace CLI</strong></a> user, you can skip the step above.</p>
 
 <h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
 
-<p><code>capistrano-rack</code> recipe supports two Rackspace Cloud services:</p>
+<p><code>capistrano-rack</code> recipe supports two Rackspace Cloud services with configurable options:</p>
+
+<div class="highlight highlight-source-ruby"><pre>    set <span class="pl-c1">:rack_config</span>, <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pse">#{</span><span class="pl-s1"><span class="pl-c1">ENV</span>[<span class="pl-s"><span class="pl-pds">'</span>HOME<span class="pl-pds">'</span></span>]</span><span class="pl-pse"><span class="pl-s1">}</span></span>/.rack/config<span class="pl-pds">"</span></span> <span class="pl-c"># default</span>
+    set <span class="pl-c1">:rack_connection_options</span>, {}                <span class="pl-c"># default</span>
+    set <span class="pl-c1">:rack_addr_type</span>, <span class="pl-c1">:private</span>                   <span class="pl-c"># default</span></pre></div>
+
+<p>Where,</p>
+
+<ul>
+<li>
+<code>rack_config</code>: Rackspace configuration file.</li>
+<li>
+<code>rack_connection_options</code>: Optional connection parameters.</li>
+<li>
+<code>rack_addr_type</code>: type of IP addresses (<code>:public</code> or <code>:private</code>).</li>
+</ul>
 
 <h3>
-<a id="next-generation-cloud-servers" class="anchor" href="#next-generation-cloud-servers" aria-hidden="true"><span class="octicon octicon-link"></span></a>Next Generation Cloud Servers™</h3>
+<a id="next-generation-cloud-servers" class="anchor" href="#next-generation-cloud-servers" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Next Generation Cloud Servers™</h3>
 
 <p>To deploy to your Next Gen Cloud servers:</p>
 
-<div class="highlight highlight-source-ruby"><pre>rackspace_servers <span class="pl-s"><span class="pl-pds">%w{</span>app web<span class="pl-pds">}</span></span>, <span class="pl-s"><span class="pl-pds">'</span>^myservers-<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre>    rack_servers <span class="pl-s"><span class="pl-pds">%w{</span>app web<span class="pl-pds">}</span></span>, <span class="pl-s"><span class="pl-pds">'</span>^myservers-<span class="pl-pds">'</span></span></pre></div>
 
-<p><code>rackspace_servers()</code> function supports the following ordered parameters:</p>
+<p><code>rack_servers()</code> function supports the following ordered parameters:</p>
 
 <ul>
 <li>
 <code>roles</code>: your <a href="http://capistranorb.com/">Capistrano Roles</a>.</li>
 <li>
 <code>regex_str</code>: a regular expression to filter throught your Next Gen Cloud servers.</li>
-<li>
-<code>addr_type</code>: type of IP addresses (<code>:public</code> or <code>:private</code>).</li>
-<li>
-<code>config_file</code>: Rackspace configuration file.</li>
-<li>
-<code>connection_options</code>: Optional connection parameters.</li>
 </ul>
 
 <h3>
-<a id="auto-scale" class="anchor" href="#auto-scale" aria-hidden="true"><span class="octicon octicon-link"></span></a>Auto Scale</h3>
+<a id="auto-scale" class="anchor" href="#auto-scale" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Auto Scale</h3>
 
 <p>To deploy to your Scaling Group:</p>
 
-<div class="highlight highlight-source-ruby"><pre>rackspace_autoscale <span class="pl-s"><span class="pl-pds">%w{</span>app web<span class="pl-pds">}</span></span>, <span class="pl-s"><span class="pl-pds">'</span>mygroup<span class="pl-pds">'</span></span></pre></div>
+<div class="highlight highlight-source-ruby"><pre>    rack_autoscale <span class="pl-s"><span class="pl-pds">%w{</span>app web<span class="pl-pds">}</span></span>, <span class="pl-s"><span class="pl-pds">'</span>mygroup<span class="pl-pds">'</span></span></pre></div>
 
-<p><code>rackspace_autoscale()</code> function supports the following ordered parameters:</p>
+<p><code>rack_autoscale()</code> function supports the following ordered parameters:</p>
 
 <ul>
 <li>
 <code>roles</code>: your <a href="http://capistranorb.com/">Capistrano Roles</a>.</li>
 <li>
 <code>group_name</code>: Name of your Scaling Group.</li>
-<li>
-<code>addr_type</code>: type of IP addresses (<code>:public</code> or <code>:private</code>).</li>
-<li>
-<code>config_file</code>: Rackspace configuration file.</li>
-<li>
-<code>connection_options</code>: Optional connection parameters.</li>
 </ul>
 
 <h3>
-<a id="optional-connection-parameters" class="anchor" href="#optional-connection-parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>Optional Connection Parameters</h3>
+<a id="optional-connection-parameters" class="anchor" href="#optional-connection-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Optional Connection Parameters</h3>
 
 <table>
     <tr>
@@ -117,41 +119,42 @@ api-key  = your_api_key
 <th>Description</th>
 </tr>
     <tr>
-        <td>:connect_timeout</td>
+        <td>connect_timeout</td>
         <td>Connection timeout (default: 60 seconds)</td>
     </tr>
     <tr>
-        <td>:read_timeout</td>      
-        <td>Read timeout for connection (default: 60 seconds)</td>  </tr>
+        <td>read_timeout</td>
+        <td>Read timeout for connection (default: 60 seconds)</td>
+    </tr>
     <tr>
-        <td>:write_timeout</td>
+        <td>write_timeout</td>
         <td>Write timeout for connection (default: 60 seconds)</td>
     </tr>
     <tr>
-        <td>:proxy</td>
+        <td>proxy</td>
         <td>Proxy for HTTP and HTTPS connections</td>
     </tr>
     <tr>
-        <td>:ssl_ca_path</td>
+        <td>ssl_ca_path</td>
         <td>Path to SSL certificate authorities</td>
     </tr>
     <tr>
-        <td>:ssl_ca_file</td>
+        <td>ssl_ca_file</td>
         <td>SSL certificate authority file</td>
     </tr>
     <tr>
-        <td>:ssl_verify_peer</td>
+        <td>ssl_verify_peer</td>
         <td>SSL verify peer (default: true)</td>
     </tr>   
 </table>
 
 <h2>
-<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributing</h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
 
 <p>Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the <a href="http://contributor-covenant.org/">Contributor Covenant</a> code of conduct.</p>
 
 <h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <p>This gem is available as open source under the terms of the <a href="http://opensource.org/licenses/MIT">MIT License</a>.</p>
       </section>
