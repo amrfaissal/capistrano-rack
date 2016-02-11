@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://amrfaissal.github.io/capistrano-rack/"
   spec.license       = "MIT"
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = Dir['lib/**/*.rb']
   spec.executables   = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   spec.require_paths = ["lib"]
 

@@ -29,10 +29,10 @@ describe Capistrano::Rack do
   }
   subject { mock_rackspace.new }
 
-  describe '#rackspace_servers' do
+  describe '#rack_servers' do
     let(:output) {
       begin
-        subject.rackspace_servers( %w{web}, '^myserver-', (Dir.getwd + '/spec/config') )
+        subject.rack_servers( %w{web}, '^myserver-' )
       rescue
         []
       end
@@ -43,10 +43,10 @@ describe Capistrano::Rack do
     end
   end
 
-  describe '#autoscale_servers' do
+  describe '#rack_autoscale' do
     let(:output) {
       begin
-        subject.rackspace_autoscale( %w{web}, 'mygroup', (Dir.getwd + '/spec/config') )
+        subject.rack_autoscale( %w{web}, 'mygroup' )
       rescue
         []
       end
