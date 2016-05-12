@@ -4,13 +4,13 @@ require 'capistrano/rack/colorize'
 
 class RackspaceConfig
   def self.load()
-    config_path = fetch(:rack_config) || "#{ENV['HOME']}/.rack/config"
+    @config_path ||= fetch(:rack_config) || "#{ENV['HOME']}/.rack/config"
 
-    if !File.exist?(config_path)
-      raise FileNotFoundError, "Rackspace configuration file not found".bold.red
+    if !File.exist?(@config_path)
+      raise FileNotFoundError, "Rackspace configuration file not found"
     end
 
-    props_reader = PropertiesReader.new(config_path)
+    props_reader = PropertiesReader.new(@config_path)
     return {
       :rackspace_api_key => props_reader.get("api-key"),
       :rackspace_username => props_reader.get("username"),

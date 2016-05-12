@@ -19,9 +19,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_runtime_dependency "capistrano", "~> 3.4", ">= 3.0.0"
-  spec.add_runtime_dependency "fog", "~> 1.35"
-  spec.add_development_dependency "bundler", "~> 1.10"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.3"
+  spec.add_runtime_dependency "capistrano", "~> 3.5", ">= 3.0.0"
+  spec.add_runtime_dependency "fog", "~> 1.38"
+  spec.add_development_dependency "bundler", "~> 1.12", ">= 1.12.3"
+  spec.add_development_dependency "rake", "~> 11.1", ">= 11.1.2"
+  spec.add_development_dependency "rspec", "~> 3.4", ">= 3.4.0"
 end

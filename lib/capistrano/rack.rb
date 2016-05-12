@@ -1,6 +1,6 @@
 # coding: utf-8
 require 'fog'
-require 'capistrano'
+require 'capistrano/all'
 require 'capistrano/rack/config'
 require 'capistrano/rack/version'
 require 'capistrano/rack/deprecated'
@@ -8,19 +8,23 @@ require 'capistrano/rack/deprecated'
 module Capistrano
   module Rack
     extend Deprecated
+    include Capistrano::DSL::Env
 
     def rack_servers(roles=nil, regex_str='')
+      connection_options ||= fetch(:rack_connection_options) || {}
+      addr_type ||= fetch(:rack_addr_type) || :private
+
       @compute_service = Fog::Compute.new(RackspaceConfig.load()
-                                            .merge({
-                                                     :provider => 'Rackspace',
-                                                     :version => :v2,
-                                                     :connection_options => fetch(:rack_connection_options) || {}
-                                                   }))
-      addr_type = fetch(:rack_addr_type) || :private
+                                           .merge({
+                                                    :provider => 'Rackspace',
+                                                    :version => :v2,
+                                                    :connection_options => connection_options
+                                                  }))
+
       # List all servers and filter them based on the passed 'regex_str' parameter
       @compute_service.list_servers.body['servers']
         .select { |server| !server['name'].match(/#{regex_str}/).nil? }
-        .flat_map { |s| s["addresses"][addr_type.to_s] }
+        .flat_map { |s| s['addresses'][addr_type.to_s] }
         .select { |iface| iface['version'] == 4 }
         .map { |iface| iface['addr'] }
         .each { |server_addr| server server_addr, { :roles => (roles || %w{app}) } }
@@ -31,10 +35,10 @@ module Capistrano
     end
 
     def rack_autoscale(roles=nil, group_name='')
-      rackspace_config = RackspaceConfig.load()
-      connection_options = fetch(:rack_connection_options) || {}
-      addr_type = fetch(:rack_addr_type) || :private
+      connection_options ||= fetch(:rack_connection_options) || {}
+      addr_type ||= fetch(:rack_addr_type) || :private
 
+      rackspace_config = RackspaceConfig.load()
       if !connection_options.empty? then
         rackspace_config.merge!({:connection_options => connection_options})
       end
@@ -63,6 +67,5 @@ module Capistrano
     deprecated_alias :rackspace_autoscale, :rack_autoscale
   end
 end
-
 
 self.extend Capistrano::Rack
