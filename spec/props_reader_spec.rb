@@ -3,13 +3,13 @@ require 'capistrano/rack/props_reader'
 
 describe PropertiesReader do
 
-  subject { PropertiesReader.new(Dir.getwd + '/spec/config') }
+  subject { PropertiesReader.new(File.expand_path('spec/config')) }
 
   describe '#to_s' do
     let(:result) { subject.to_s }
 
     it 'returns a string representation of your configuration file' do
-      expect(result).to eql("File Name /home/faissal/Projects/capistrano-rack/spec/config \nregion=  LON \nusername=  your_username \napi-key=  your_api_key \n")
+      expect(result).to eql("File Name #{File.expand_path('spec/config')} \nregion=  LON \nusername=  your_username \napi-key=  your_api_key \n")
     end
   end
 

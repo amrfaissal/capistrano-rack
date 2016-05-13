@@ -4,7 +4,7 @@ describe RackspaceConfig do
 
   describe '.load' do
     before {
-      RackspaceConfig.instance_variable_set(:@config_path, "#{Dir.getwd}/spec/config")
+      RackspaceConfig.instance_variable_set(:@config_path, File.expand_path('spec/config'))
     }
 
     it "returns Rackspace configuration hash" do
