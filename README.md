@@ -1,6 +1,20 @@
-# capistrano-rack [![Build Status](https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master)](https://travis-ci.org/amrfaissal/capistrano-rack) [![Dependency Status](https://gemnasium.com/amrfaissal/capistrano-rack.svg)](https://gemnasium.com/amrfaissal/capistrano-rack) [![Gem Version](https://badge.fury.io/rb/capistrano-rack.svg)](https://badge.fury.io/rb/capistrano-rack) [![ghit.me](https://ghit.me/badge.svg?repo=amrfaissal/capistrano-rack)](https://ghit.me/repo/amrfaissal/capistrano-rack)
+<div align="center">
+  <h1>capistrano-rack</h1>
+  <div>
+  	<img style="vertical-align:-20px" src="http://capistranorb.com/images/CapistranoLogo.png" height="70"/>
+  	<span>recipe to be served with Rackspace</span>
+  </div>
+</div><br/>
 
-Capistrano recipe to be served with Rackspace
+<div style="text-align: center;">
+
+[![Build Status](https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master)](https://travis-ci.org/amrfaissal/capistrano-rack) [![Dependency Status](https://gemnasium.com/amrfaissal/capistrano-rack.svg)](https://gemnasium.com/amrfaissal/capistrano-rack) [![Gem Version](https://badge.fury.io/rb/capistrano-rack.svg)](https://badge.fury.io/rb/capistrano-rack) [![ghit.me](https://ghit.me/badge.svg?repo=amrfaissal/capistrano-rack)](https://ghit.me/repo/amrfaissal/capistrano-rack)
+
+</div>
+
+---
+
+`capistrano-rack` simplifies your deployment to Rackspace Cloud services by connecting you to the appropriate service matching your criteria.
 
 ## Installation
 
@@ -16,13 +30,13 @@ and in your `Capfile`:
     require 'capistrano/rack'
 ```
 
-And then execute:
+Then execute:
 
 ```shell
     $ bundle && bundle exec rake
 ```
 
-Make sure to have a `~/.rack/config` in your `$HOME` directory with these properties:
+**NOTE** Make sure you have a `~/.rack/config` file in your `$HOME` directory with these properties:
 
 ```text
     region   = rackspace_region (e.g LON)
@@ -30,7 +44,7 @@ Make sure to have a `~/.rack/config` in your `$HOME` directory with these proper
     api-key  = your_api_key
 ```
 
-If you are already a [**Rackspace CLI**](https://developer.rackspace.com/docs/rack-cli/) user, you can skip the step above.
+If you are already a [**Rackspace CLI**](https://developer.rackspace.com/docs/rack-cli/) user, you can skip the note above.
 
 ## Usage
 
@@ -110,7 +124,7 @@ To deploy to your Scaling Group:
 
 ## Contributing
 
-Bug reports and pull requests are welcome. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org/) code of conduct.
+Bug reports, Pull requests and Stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/amrfaissal/capistrano-rack/issues/new).
 
 ## License
 
