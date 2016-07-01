@@ -1,10 +1,6 @@
-<div align="center">
-  <h1>capistrano-rack</h1>
-  <div>
-  	<img style="vertical-align:-20px" src="http://capistranorb.com/images/CapistranoLogo.png" height="70"/>
-  	<span>recipe to be served with Rackspace</span>
-  </div>
-</div><br/>
+## capistrano-rack
+
+![Capistrano](http://capistranorb.com/images/CapistranoLogo.png) recipe to be served with Rackspace.
 
 [![Build Status](https://travis-ci.org/amrfaissal/capistrano-rack.svg?branch=master)](https://travis-ci.org/amrfaissal/capistrano-rack) [![Dependency Status](https://gemnasium.com/amrfaissal/capistrano-rack.svg)](https://gemnasium.com/amrfaissal/capistrano-rack) [![Gem Version](https://badge.fury.io/rb/capistrano-rack.svg)](https://badge.fury.io/rb/capistrano-rack) [![ghit.me](https://ghit.me/badge.svg?repo=amrfaissal/capistrano-rack)](https://ghit.me/repo/amrfaissal/capistrano-rack)
 
