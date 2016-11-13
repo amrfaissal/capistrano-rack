@@ -1,6 +1,6 @@
 ## capistrano-rack
 
-![Capistrano](https://upload.wikimedia.org/wikipedia/en/thumb/d/d8/Capistrano.svg/256px-Capistrano.svg.png)
+![](https://raw.githubusercontent.com/amrfaissal/capistrano-rack/gh-pages/images/CapistranoLogo.png)
 
 Capistrano recipe to be served with Rackspace.
 
